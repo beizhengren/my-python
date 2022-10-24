@@ -1,9 +1,6 @@
 from datetime import datetime
-from gettext import bind_textdomain_codeset
 import os, fnmatch
 import random
-import shutil
-import glob
 import sys
 
 def find_with_pattern(pattern, path):
