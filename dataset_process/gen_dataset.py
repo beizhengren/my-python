@@ -15,6 +15,9 @@ def gen_dataset():
     '''
         read all the file name of given dataset
         parition dataset into train, val, test set
+        sys.argv[1]: dir of given dataset
+        sys.argv[2]: amount or ration of train_sample
+        sys.argv[3]: amount or ration of validation_sample
     '''
     argc = len(sys.argv)
     
@@ -22,10 +25,13 @@ def gen_dataset():
     print("Amount of arguments is: {}".format(argc))
     if argc < 2:
         sys.exit("Too few args!")
-    
+
     dataset_dir = sys.argv[1]    
-    train_sample_number = int(sys.argv[2])
-    validation_sample_num = int(sys.argv[3])
+    train_sample_num = sys.argv[2]
+    validation_sample_num = sys.argv[3]
+    if isinstance(train_sample_num, type(validation_sample_num)) is False:
+        sys.exit("train_sample_num and validation_sample_num are with different type")
+
     imagesets_main_dir = os.getcwd() if argc < 5 else sys.argv[4] 
     print("Out dir is: {}".format(imagesets_main_dir))
 
@@ -44,17 +50,25 @@ def gen_dataset():
     print("Amount of final dataset is: {}".format(len(final_data_set)))
 
     # partition the set
-    total_sample_number = len(final_data_set)
+    total_sample_number = len(final_data_set)   
+
+    if train_sample_num.isdecimal() and validation_sample_num.isdecimal():
+        train_sample_num = int(train_sample_num)
+        validation_sample_num = int(validation_sample_num)
+    else:
+        train_sample_num = int(total_sample_number * float(train_sample_num))
+        validation_sample_num = int(total_sample_number * float(validation_sample_num))
+
     print('-------------------------------------------')
-    print("Amount of total is: {} ".format(total_sample_number))
-    print("Amount of train set is: {} ".format(train_sample_number))
+    print("Amount of total set is: {} ".format(total_sample_number))
+    print("Amount of train set is: {} ".format(train_sample_num))
     print("Amount of validation set is: {}".format(validation_sample_num))
 
-    test_sample_num = total_sample_number - train_sample_number - validation_sample_num
+    test_sample_num = total_sample_number - train_sample_num - validation_sample_num
     
     random.seed(1)
     ## get train_set
-    train_set = set(random.sample(final_data_set, train_sample_number))
+    train_set = set(random.sample(final_data_set, train_sample_num))
     
     ## get val_set
     ## A.difference (B) = A - B, for set A and B

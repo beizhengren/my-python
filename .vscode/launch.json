@@ -16,8 +16,8 @@
             "python": "/home/wyz/anaconda3/envs/OpenPCDet/bin/python",
             "args": [
                 "/home/wyz/workspace/data/dataset/kitti/training/",
-                "3000",
-                "500",
+                "0.9",
+                "0.1",
             ],
             
         }
