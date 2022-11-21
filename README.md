@@ -1,2 +1,2 @@
 # my-python
-This respostory record my learning of python
+This respostory is to record my learning of python
