@@ -20,6 +20,21 @@
                 "0.1",
             ],
             
+        },
+                {
+            "name": "Python: Parse PCD",
+            "type": "python",
+            "request": "launch",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+
+            "cwd": "${workspaceFolder}/parse_pcd",
+            "program": "parse_pcd.py",
+            "python": "/usr/bin/python3",
+            "args": [
+                "test.pcd"
+            ],
+            
         }
     ]
 }
